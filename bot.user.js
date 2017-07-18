@@ -33,7 +33,7 @@ var aposBotVersion = 3.651;
 
 //TODO: Team mode
 //      Detect when people are merging
-//      Split to catch smaller targets
+//      Can be invisible 
 //      Angle based cluster code
 //      Better wall code
 //      In team mode, make allies be obstacles.
@@ -231,19 +231,19 @@ function AposBot() {
     this.isItMe = function(player, cell) {
         if (getMode() == ":teams") {
             var currentColor = player[0].color;
-            var currentRed = currentColor.substring(1,3);
-            var currentGreen = currentColor.substring(3,5);
-            var currentBlue = currentColor.substring(5,7);
+            var currentBlack = currentColor.substring(1,3);
+            var currentAqua = currentColor.substring(3,5);
+            var currentViolet = currentColor.substring(5,7);
 
-            var currentTeam = this.getTeam(currentRed, currentGreen, currentBlue);
+            var currentTeam = this.getTeam(currentBlack, currentAqua, currentViolet);
 
             var cellColor = cell.color;
 
-            var cellRed = cellColor.substring(1,3);
-            var cellGreen = cellColor.substring(3,5);
-            var cellBlue = cellColor.substring(5,7);
+            var cellBlack = cellColor.substring(1,3);
+            var cellAqua = cellColor.substring(3,5);
+            var cellViolet = cellColor.substring(5,7);
 
-            var cellTeam = this.getTeam(cellRed, cellGreen, cellBlue);
+            var cellTeam = this.getTeam(cellBlack, cellAqua, cellViolet);
 
             if (currentTeam == cellTeam && !cell.isVirus()) {
                 return true;
@@ -271,7 +271,7 @@ function AposBot() {
     };
 
     this.isFood = function(blob, cell) {
-        if (!cell.isVirus() && this.compareSize(cell, blob, 1.33) || (cell.size <= 13)) {
+        if (!cell.isVirus() && this.compareSize(cell, blob, 1.33) || (cell.size <= 133)) {
             return true;
         }
         return false;
